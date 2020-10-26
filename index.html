@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS LAB 3</title>
+    <style>
+        main {
+            display: flex;
+            flex-direction: row;
+        }
+        form {
+            margin: auto;
+        }
+        div {
+            border: 1px black dotted;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div id="LibraryCalc">
+        <form onsubmit="libFun()">
+            <label for="daysLate">Days Late</label>
+            <input type="text" id="daysLate">
+            <br>
+            <label for="contType">Content Type</label>
+            <input type="text" id="contType">
+            <br>
+
+        </form>
+        <button id="libBut">Submit</button>
+        <br>
+        <p id="outputLib"></p>
+    </div>
+    <div id="PizzaCalc">
+        <form onsubmit="pizFun()">
+            <label for="daysLate">Num Pizzas</label>
+            <input type="text" id="pizAmnt">
+            <br>
+            <label for="contType">Num Toppings</label>
+            <input type="text" id="topAmnt">
+            <br>
+
+        </form>
+        <button id="pizBut">Submit</button>
+        <br>
+        <p id="outputPiz"></p>
+    </div>
+</main>
+<script>
+    document.getElementById('libBut').addEventListener('click',libFun);
+    document.getElementById('pizBut').addEventListener('click',pizFun);
+
+
+    function libFun(){
+        let total = 0;
+        const daysLate = parseInt(document.getElementById('daysLate').value);
+        const mediaType = document.getElementById('contType').value;
+
+        if(mediaType.toLowerCase() === 'dvd'){
+            total = daysLate * 0.50;
+        }
+        else if (mediaType.toLowerCase() === 'book'){
+            total = daysLate * 0.25;
+        }
+        else{
+            document.getElementById('outputLib').textContent = 'Media must be DVD or Book';
+            return;
+        }
+
+        document.getElementById('outputLib').textContent = 'The total is $' + total;
+    }
+    function pizFun(){
+        let total = 0;
+        const pizAmnt = Number(document.getElementById('pizAmnt').value);
+        const topAmnt = Number(document.getElementById('topAmnt').value);
+
+        total = (pizAmnt * 15.00);
+        total += (topAmnt * 1.25);
+
+        const totPP = (total / 2);
+
+        document.getElementById('outputPiz').textContent = 'The total per person is $' + totPP;
+    }
+</script>
+</body>
+</html>
