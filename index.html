@@ -16,11 +16,12 @@
             width: 100%;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <main>
     <div id="LibraryCalc">
-        <form onsubmit="libFun()">
+        <form>
             <label for="daysLate">Days Late</label>
             <input type="text" id="daysLate">
             <br>
@@ -34,11 +35,11 @@
         <p id="outputLib"></p>
     </div>
     <div id="PizzaCalc">
-        <form onsubmit="pizFun()">
-            <label for="daysLate">Num Pizzas</label>
+        <form>
+            <label for="pizAmnt">Num Pizzas</label>
             <input type="text" id="pizAmnt">
             <br>
-            <label for="contType">Num Toppings</label>
+            <label for="topAmnt">Num Toppings</label>
             <input type="text" id="topAmnt">
             <br>
 
@@ -49,14 +50,10 @@
     </div>
 </main>
 <script>
-    document.getElementById('libBut').addEventListener('click',libFun);
-    document.getElementById('pizBut').addEventListener('click',pizFun);
-
-
-    function libFun(){
+    $("#libBut").click(function(){
         let total = 0;
-        const daysLate = parseInt(document.getElementById('daysLate').value);
-        const mediaType = document.getElementById('contType').value;
+        const daysLate = Number($('#daysLate').val());
+        const mediaType = $('#contType').val();
 
         if(mediaType.toLowerCase() === 'dvd'){
             total = daysLate * 0.50;
@@ -65,24 +62,26 @@
             total = daysLate * 0.25;
         }
         else{
-            document.getElementById('outputLib').textContent = 'Media must be DVD or Book';
+            $("#outputLib").text('Media must be DVD or Book');
             return;
         }
 
-        document.getElementById('outputLib').textContent = 'The total is $' + total;
-    }
-    function pizFun(){
+        $("#outputLib").text('The total is $' + total)
+    });
+
+    $("#pizBut").click(function(){
         let total = 0;
-        const pizAmnt = Number(document.getElementById('pizAmnt').value);
-        const topAmnt = Number(document.getElementById('topAmnt').value);
+        const pizAmnt = ($('#pizAmnt').val());
+        const topAmnt = Number($('#topAmnt').val());
 
         total = (pizAmnt * 15.00);
         total += (topAmnt * 1.25);
 
         const totPP = (total / 2);
 
-        document.getElementById('outputPiz').textContent = 'The total per person is $' + totPP;
-    }
+        $("#outputPiz").text('The total per person is $' + totPP);
+    });
+
 </script>
 </body>
 </html>
